@@ -1,16 +1,16 @@
 FROM python:3
 
-# Update and install distutils package (needed by Django)
+# Install distutils first (required by Django)
 RUN apt-get update && apt-get install -y python3-distutils
 
-# Install Django
+# Then install Django
 RUN pip install django==3.2
 
-# Copy all project files to container
+# Copy your project files into container
 COPY . .
 
-# Run database migrations
+# Run migrations
 RUN python manage.py migrate
 
-# Start the Django development server (adjust if needed)
+# Command to run your app (adjust as needed)
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
